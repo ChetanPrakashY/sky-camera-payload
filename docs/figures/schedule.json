@@ -1,0 +1,96 @@
+{
+ "end": 42.8,
+ "sigma": 2.9,
+ "critical": [
+  "Requirements + SRR",
+  "On-board software v1",
+  "PDR",
+  "Build and integrate",
+  "Bench calibration",
+  "Ground night-sky trial",
+  "Trial report"
+ ],
+ "rows": [
+  {
+   "task": "Requirements + SRR",
+   "o": 3,
+   "m": 5,
+   "p": 8,
+   "te": 5.2,
+   "start": 0.0,
+   "slack": -0.0
+  },
+  {
+   "task": "Optics and camera selection",
+   "o": 3,
+   "m": 5,
+   "p": 10,
+   "te": 5.5,
+   "start": 5.2,
+   "slack": 0.8
+  },
+  {
+   "task": "On-board software v1",
+   "o": 8,
+   "m": 12,
+   "p": 20,
+   "te": 12.7,
+   "start": 5.2,
+   "slack": -0.0
+  },
+  {
+   "task": "Power and thermal design",
+   "o": 4,
+   "m": 6,
+   "p": 10,
+   "te": 6.3,
+   "start": 10.7,
+   "slack": 0.8
+  },
+  {
+   "task": "PDR",
+   "o": 2,
+   "m": 3,
+   "p": 5,
+   "te": 3.2,
+   "start": 17.8,
+   "slack": 0.0
+  },
+  {
+   "task": "Build and integrate",
+   "o": 8,
+   "m": 10,
+   "p": 16,
+   "te": 10.7,
+   "start": 21.0,
+   "slack": 0.0
+  },
+  {
+   "task": "Bench calibration",
+   "o": 3,
+   "m": 4,
+   "p": 7,
+   "te": 4.3,
+   "start": 31.7,
+   "slack": 0.0
+  },
+  {
+   "task": "Ground night-sky trial",
+   "o": 2,
+   "m": 3,
+   "p": 8,
+   "te": 3.7,
+   "start": 36.0,
+   "slack": 0.0
+  },
+  {
+   "task": "Trial report",
+   "o": 2,
+   "m": 3,
+   "p": 5,
+   "te": 3.2,
+   "start": 39.7,
+   "slack": 0.0
+  }
+ ]
+}

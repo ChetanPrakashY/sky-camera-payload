@@ -1,0 +1,67 @@
+# On-board software user manual
+
+SKY-UM-001 rev 0.1, 27 October 2026
+# 1 What the software does
+
+`procframe` processes one camera frame: it corrects it with the calibration products, finds stars and
+satellite streaks, and appends a telemetry packet. Python scripts around it make the calibration products,
+decode the packets on the ground and check the results. Requirements and design are in SKY-PDR-001; file and
+packet formats in SKY-ICD-001.
+
+# 2 Install
+
+Needs a C compiler, make and Python 3 with numpy and matplotlib (openpyxl for the budget spreadsheet).
+
+1. `cd payload/onboard`
+2. `make` builds `procframe`.
+3. `make procframe-check` builds a test version with memory and undefined-behaviour checks.
+
+# 3 Quick start: a complete simulated trial
+
+`./run_trial.sh trial_data` simulates a calibration set and six sky frames, builds the calibration products,
+characterises the simulated camera, runs procframe on every science frame, decodes the telemetry and prints
+how many stars and streaks were found. It finishes in a few seconds.
+
+# 4 Calibration
+
+| Command | Input | Output |
+|---|---|---|
+| `python3 calib/masters.py DIR` | darks and flats listed in DIR/frames.jsonl | DIR/calib/dark.f32, flat.f32, badpix.u8 |
+| `python3 calib/characterize.py DIR` | dark, photon-transfer and dark-ramp frames | printed table, DIR/calib/characterization.json, ptc.png |
+
+Take new darks whenever the exposure time or the temperature changes; take new flats whenever the lens or
+focus changes.
+
+# 5 Running procframe
+
+`procframe CALIBDIR RAW WIDTH HEIGHT INDEX TIME_GPS PACKETS [--csv FILE] [--corrected FILE]`
+
+| Argument | Meaning |
+|---|---|
+| CALIBDIR | folder with dark.f32, flat.f32, badpix.u8 |
+| RAW | raw frame (SKY-ICD-001 section 3.1) |
+| WIDTH HEIGHT | frame size in pixels |
+| INDEX | frame index written into the packet |
+| TIME_GPS | GPS time of the exposure start, seconds with a fraction |
+| PACKETS | file the packet is appended to |
+| --csv FILE | also write the detections as CSV |
+| --corrected FILE | also write the corrected image as float32 |
+
+It prints one line per frame: background, noise, number of sources, packet size. Exit code 0 on success, 2
+if a file cannot be read or written.
+
+# 6 On the ground
+
+`python3 ground/parse_tm.py PACKETS` prints one line per good packet, the number of packets rejected for a bad
+CRC, and writes PACKETS.csv. `python3 ground/evaluate.py DIR PACKETS` compares detections with the simulator's
+truth (simulated data only).
+
+# 7 Troubleshooting
+
+| Symptom | Likely cause | Action |
+|---|---|---|
+| "short read" | wrong WIDTH or HEIGHT, or a truncated file | check the frame size in frames.jsonl |
+| hundreds of sources in a dark frame | dark or flat from another exposure time | rebuild the calibration products |
+| no sources at all | lens cap on, or focus far off | take a test frame and look at it |
+| stars flagged as streaks | tracking error or wind shake during the exposure | shorten the exposure, check the mount |
+| packets rejected on the ground | radio errors | check the CRC count in parse_tm; move the antennas |

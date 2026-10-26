@@ -1,0 +1,71 @@
+{
+ "rows": [
+  {
+   "load": "Camera module (IMX477)",
+   "rail_v": 5.0,
+   "on_w": 1.0,
+   "duty": 1.0,
+   "avg_w": 1.0,
+   "source": "TBC: bench measurement"
+  },
+  {
+   "load": "On-board computer",
+   "rail_v": 5.0,
+   "on_w": 5.0,
+   "duty": 1.0,
+   "avg_w": 5.0,
+   "source": "TBC: bench measurement under processing load"
+  },
+  {
+   "load": "GNSS receiver",
+   "rail_v": 3.3,
+   "on_w": 0.15,
+   "duty": 1.0,
+   "avg_w": 0.15,
+   "source": "TBC: datasheet"
+  },
+  {
+   "load": "IMU",
+   "rail_v": 3.3,
+   "on_w": 0.05,
+   "duty": 1.0,
+   "avg_w": 0.05,
+   "source": "TBC: datasheet"
+  },
+  {
+   "load": "Telemetry radio (transmitting)",
+   "rail_v": 5.0,
+   "on_w": 1.0,
+   "duty": 0.1,
+   "avg_w": 0.1,
+   "source": "TBC: datasheet; 10% transmit duty"
+  },
+  {
+   "load": "Camera heater",
+   "rail_v": 7.4,
+   "on_w": 3.0,
+   "duty": 0.4,
+   "avg_w": 1.2,
+   "source": "TBC: thermal analysis"
+  }
+ ],
+ "p5_w": 6.1,
+ "p33_w": 0.2,
+ "ldo_loss_w": 0.103,
+ "buck_loss_w": 0.711,
+ "battery_w": 8.31,
+ "energy_wh": 39.9,
+ "capacity_mah": 5393,
+ "frame_mb": 24.66,
+ "stored_gb_per_h": 44.4,
+ "packet_bytes": 981,
+ "downlink_bps": 3924,
+ "raw_downlink_mbps": 98.6,
+ "assumptions": {
+  "battery_v": 7.4,
+  "buck_efficiency": 0.9,
+  "margin": 0.2,
+  "flight_h": 4.0,
+  "frame_period_s": 2.0
+ }
+}
