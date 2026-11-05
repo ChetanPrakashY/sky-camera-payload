@@ -55,7 +55,7 @@ after each session.
 
 ## 3.2 Requirements
 
-Values are design choices for this study; the rationale column says where each comes from.
+The thresholds are set by this project, not by a customer; the rationale column justifies each.
 
 | ID | Requirement | Rationale | Verified by |
 |---|---|---|---|
