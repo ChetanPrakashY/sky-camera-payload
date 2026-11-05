@@ -85,6 +85,10 @@ def build(src, ctx):
     out_md = HERE / "out" / f"{meta['id']}.md"
     out_md.write_text(f"# {meta['title']}\n\n{meta['id']} rev {meta['revision']}, {meta['date']}\n" + body)
     doc = Document()
+    cp = doc.core_properties                     # File > Properties: the author, not the library's defaults
+    cp.author = cp.last_modified_by = meta["author"]
+    cp.title, cp.subject, cp.comments = meta["title"], meta["id"], meta["status"]   # comments = dc:description
+    cp.revision = 1
     st = doc.styles["Normal"]; st.font.name = "Calibri"; st.font.size = Pt(10.5)
     for s in doc.sections:
         s.left_margin = s.right_margin = Cm(2.2)
